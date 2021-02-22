@@ -2,7 +2,6 @@ from machine import Pin
 from time import sleep, sleep_ms
 #from time import sleep_ms
 
-
 d5=Pin(14,Pin.OUT)
 d6=Pin(15,Pin.OUT)
 
@@ -18,4 +17,7 @@ def bk():
         t=t+1
     d5.off()
     d6.off()
+
+bk()
+
 

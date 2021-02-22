@@ -1,3 +1,4 @@
+
 # This file is executed on every boot (including wake-boot from deepsleep)
 #import esp
 #esp.osdebug(None)
@@ -7,7 +8,6 @@ import gc
 #import webrepl
 #webrepl.start()
 #gc.collect()
-import conf
 
 def do_connect(ssid, pwd):
     import network
@@ -25,7 +25,15 @@ def do_connect(ssid, pwd):
 #esp.osdebug(None)
  
 # Attempt to connect to WiFi network
-do_connect(ssid, pss)
+import json
+with open("conf.json") as config:
+    config_data = json.load(config)
+
+print ("Connecting {}".format (config_data["wifi"]["ssid"]))
+do_connect(config_data["wifi"]["ssid"]), config_data["wifi"]["pss"])
+
  
 #import webrepl
 #webrepl.start()
+
+
