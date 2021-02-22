@@ -3,6 +3,7 @@
 #import esp
 #esp.osdebug(None)
 import uos, machine
+import webrepl
 #uos.dupterm(None, 1) # disable REPL on UART(0)
 import gc
 #import webrepl
@@ -19,6 +20,7 @@ def do_connect(ssid, pwd):
         while not sta_if.isconnected():
             pass
     print('network config:', sta_if.ifconfig())
+    webrepl.start()
  
 # This file is executed on every boot (including wake-boot from deepsleep)
 #import esp
@@ -30,10 +32,11 @@ with open("conf.json") as config:
     config_data = json.load(config)
 
 print ("Connecting {}".format (config_data["wifi"]["ssid"]))
-do_connect(config_data["wifi"]["ssid"]), config_data["wifi"]["pss"])
+ssid=config_data["wifi"]["ssid"]
+pss= config_data["wifi"]["pss"]
+do_connect(ssid, pss)
 
  
-#import webrepl
-#webrepl.start()
+
 
 
